@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loja/tiles/drawer_tile.dart';
 
 class CustomDrawer extends StatelessWidget {
   @override
@@ -64,7 +65,12 @@ class CustomDrawer extends StatelessWidget {
                     )
                   ],
                 ),
-              )
+              ),
+              Divider(),
+              DrawerTile(Icons.home, "Inicio"),
+              DrawerTile(Icons.list, "Produtos"),
+              DrawerTile(Icons.location_on, "Lojas"),
+              DrawerTile(Icons.playlist_add_check, "Meus Pedidos"),
             ],
           )
         ],
