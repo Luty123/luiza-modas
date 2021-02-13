@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "665748596614",
+    "project_id": "loja-932f6",
+    "storage_bucket": "loja-932f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:665748596614:android:63efb7958c6d7a33f5ae07",
+        "android_client_info": {
+          "package_name": "luciano_loja.com.loja"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "665748596614-lrcq41lfee66es14l9ftqt7uucf59pnj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3dneOwOzcxjadcmNSAzucm2JD5QgGoGE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "665748596614-lrcq41lfee66es14l9ftqt7uucf59pnj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
