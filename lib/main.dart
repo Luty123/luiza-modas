@@ -8,11 +8,6 @@ void main() async {
   await Firebase.initializeApp();
 
   runApp(MyApp());
-
-  /*FirebaseFirestore.instance
-      .collection("usuarios")
-      .doc("pontuação")
-      .set({"Luciano": "1000"});*/
 }
 
 class MyApp extends StatelessWidget {
