@@ -4,9 +4,9 @@ import 'package:loja/screens/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
+// Inicializar o firebase
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   runApp(MyApp());
 }
 

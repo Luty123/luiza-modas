@@ -8,6 +8,7 @@ import 'package:transparent_image/transparent_image.dart';
 class HomeTab extends StatelessWidget {
   //final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   @override
+// Gradiente da home
   Widget build(BuildContext context) {
     Widget _buildBodyBack() => Container(
           decoration: BoxDecoration(
@@ -16,8 +17,9 @@ class HomeTab extends StatelessWidget {
             Color.fromARGB(255, 253, 181, 168)
           ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
         );
-
+// Barra flutuante
     return Stack(
+      //
       children: [
         _buildBodyBack(),
         CustomScrollView(
@@ -32,6 +34,7 @@ class HomeTab extends StatelessWidget {
                   title: const Text("Novidades"),
                   centerTitle: true,
                 )),
+// Importando imagens do firebase
             FutureBuilder<QuerySnapshot>(
               future: FirebaseFirestore.instance
                   .collection("home")
