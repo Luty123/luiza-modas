@@ -10,7 +10,7 @@ class CustomDrawer extends StatelessWidget {
     Widget _buildDrawerBack() => Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(colors: [
-            Color.fromARGB(255, 211, 118, 130),
+            Color.fromARGB(255, 255, 204, 255),
             Color.fromARGB(255, 253, 181, 168)
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         );
