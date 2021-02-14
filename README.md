@@ -1,4 +1,4 @@
-# nayra_fashin_village.
+# nayra_fashion_village.
 Projeto de App de uma loja virtual.
 # Nayra Fashion Village - Desenvolvido por Luciano Paiva Eufrázio .
 02/2021 -
@@ -26,3 +26,4 @@ Editores de codigo: Vs Code e Android Studio
 
 Proximos topicos configurações necessarias para abrir o projeto
 Continua...
+
