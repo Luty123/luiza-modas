@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
       title: 'Nayra\'s Fashion Village',
       theme: ThemeData(
           primarySwatch: Colors.blue,
-          primaryColor: Color.fromARGB(255, 4, 125, 141)),
+          primaryColor: Color.fromARGB(255, 4, 125, 141),
+          secondaryHeaderColor: Color.fromARGB(255, 211, 118, 130)),
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),
     );

@@ -26,7 +26,7 @@ class _ProductScreenState extends State<ProductScreen> {
       body: ListView(
         children: <Widget>[
           AspectRatio(
-            aspectRatio: 0.9,
+            aspectRatio: 0.8,
             child: Carousel(
               images: product.images.map((url) {
                 return NetworkImage(url);
@@ -60,6 +60,22 @@ class _ProductScreenState extends State<ProductScreen> {
                   height: 16.0,
                 ),
                 Text(
+                  "Descrição",
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  product.description,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                  ),
+                ),
+                SizedBox(
+                  height: 16.0,
+                ),
+                Text(
                   "Tamanho",
                   style: TextStyle(
                     fontSize: 16.0,
@@ -88,7 +104,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                   BorderRadius.all(Radius.circular(4.0)),
                               border: Border.all(
                                   color: s == size
-                                      ? primaryColor
+                                      ? Color.fromARGB(255, 211, 118, 130)
                                       : Colors.grey[500],
                                   width: 3.0)),
                           width: 50.0,
@@ -98,7 +114,25 @@ class _ProductScreenState extends State<ProductScreen> {
                       );
                     }).toList(),
                   ),
-                )
+                ),
+                SizedBox(
+                  height: 16.0,
+                ),
+                SizedBox(
+                  height: 44.0,
+                  child: ElevatedButton(
+                    onPressed: size != null ? () {} : null,
+                    child: Text(
+                      "Adicionar ao carrinho",
+                      style: TextStyle(fontSize: 18.0),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        primary: Color.fromARGB(255, 211, 118, 130)),
+                  ),
+                ),
+                SizedBox(
+                  height: 16.0,
+                ),
               ],
             ),
           )
