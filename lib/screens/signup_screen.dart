@@ -56,20 +56,23 @@ class SignUpScreen extends StatelessWidget {
             SizedBox(
               height: 16.0,
             ),
-            ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState.validate()) {}
-              },
-              child: Text(
-                "CRIAR CONTA",
-                style: TextStyle(
-                  fontSize: 18.0,
+            SizedBox(
+              height: 50.0,
+              child: ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState.validate()) {}
+                },
+                child: Text(
+                  "CRIAR CONTA",
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
                 ),
+                style: TextButton.styleFrom(
+                    primary: Colors.white,
+                    backgroundColor: Theme.of(context).primaryColor),
               ),
-              style: TextButton.styleFrom(
-                  primary: Colors.white,
-                  backgroundColor: Theme.of(context).primaryColor),
-            ),
+            )
           ],
         ),
       ),
