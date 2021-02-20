@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:loja/tabs/home_tab.dart';
 import 'package:loja/widgets/custom_drawer.dart';

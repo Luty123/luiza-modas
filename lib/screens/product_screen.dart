@@ -1,7 +1,6 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:loja/datas/product_data.dart';
-import 'package:carousel_pro/carousel_pro.dart';
 
 class ProductScreen extends StatefulWidget {
   final ProductData product;
