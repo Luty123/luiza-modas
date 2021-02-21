@@ -11,8 +11,8 @@ class CustomDrawer extends StatelessWidget {
     Widget _buildDrawerBack() => Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(colors: [
-            Color.fromARGB(255, 255, 204, 255),
-            Color.fromARGB(255, 253, 181, 168)
+            Color.fromARGB(255, 253, 181, 168),
+            Color.fromARGB(255, 255, 170, 255),
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         );
 // Menu Drawer e lista de opções

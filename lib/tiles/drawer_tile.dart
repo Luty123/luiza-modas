@@ -20,7 +20,7 @@ class DrawerTile extends StatelessWidget {
         },
 // Lista do menu - opções
         child: Container(
-          height: 50.0,
+          height: 80.0,
           child: Row(
             children: <Widget>[
               Icon(
