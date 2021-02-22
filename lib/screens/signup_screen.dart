@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loja/models/user_model.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:async/async.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -13,9 +14,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _passController = TextEditingController();
   final _addressController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 211, 118, 130),
         title: Text("CRIAR CONTA"),
@@ -113,6 +116,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  void _onSuccess() {}
-  void _onFail() {}
+  void _onSuccess() {
+    _scaffoldKey.currentState.showSnackBar(
+      SnackBar(
+        content: Text("Usuário criado com sucesso!"),
+        backgroundColor: Colors.greenAccent,
+        duration: Duration(seconds: 3),
+      ),
+    );
+    Future.delayed(Duration(seconds: 2))
+        .then((_) => Navigator.of(context).pop());
+  }
+
+  void _onFail() {
+    _scaffoldKey.currentState.showSnackBar(
+      SnackBar(
+        content: Text("Falha ao criar usuário!"),
+        backgroundColor: Colors.redAccent,
+        duration: Duration(seconds: 3),
+      ),
+    );
+  }
 }
