@@ -79,7 +79,28 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPrimary:
                           Color.fromARGB(255, 211, 118, 130), // foreground
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_emailController.text.isEmpty)
+                        _scaffoldKey.currentState.showSnackBar(
+                          SnackBar(
+                            content: Text(
+                                "Insira seu Email para recuperar sua senha!"),
+                            backgroundColor: Colors.redAccent,
+                            duration: Duration(seconds: 3),
+                          ),
+                        );
+                      else {
+                        model.recoverPass(_emailController.text);
+                        _scaffoldKey.currentState.showSnackBar(
+                          SnackBar(
+                            content: Text(
+                                "Email para recuperação de senha enviado!"),
+                            backgroundColor: Colors.greenAccent,
+                            duration: Duration(seconds: 3),
+                          ),
+                        );
+                      }
+                    },
                     child: Text(
                       "Esqueci minha senha",
                       textAlign: TextAlign.right,
