@@ -17,4 +17,9 @@ class ProductData {
     images = snapshot.data()["images"];
     size = snapshot.data()["size"];
   }
+// Metodo para retornar o resumo do produto
+
+  Map<String, dynamic> toResumedMap() {
+    return {"title": title, "description": description, "price": price};
+  }
 }

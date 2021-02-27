@@ -10,6 +10,7 @@ class CartProduct {
   String size; // Tamanho do produto
 
   ProductData productData; //Import, dados do produto que estão em productdata
+  CartProduct();
 
 // Constructor para obter os dados dos produtos do firebase e adicionar no carrinho
 
@@ -29,8 +30,7 @@ class CartProduct {
       "pid": pid,
       "quantity": quantity,
       "size": size,
-      "product": productData
-          .toResumedMap() // Função para armazenar apenas um resumo do produto (product_data.dart)
+      //"product": productData.toResumedMap() // Função para armazenar apenas um resumo do produto (product_data.dart)
     };
   }
 }

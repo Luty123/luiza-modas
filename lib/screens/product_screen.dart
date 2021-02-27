@@ -1,6 +1,10 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:loja/datas/cart_product.dart';
 import 'package:loja/datas/product_data.dart';
+import 'package:loja/models/cart_model.dart';
+import 'package:loja/models/user_model.dart';
+import 'package:loja/screens/login_screen.dart';
 
 class ProductScreen extends StatefulWidget {
   final ProductData product;
@@ -120,9 +124,30 @@ class _ProductScreenState extends State<ProductScreen> {
                 SizedBox(
                   height: 44.0,
                   child: ElevatedButton(
-                    onPressed: size != null ? () {} : null,
+                    onPressed: size != null
+                        ? () {
+// Função para adicionar ao carrinho se estiver logado
+                            if (UserModel.of(context).isLoggedIn()) {
+                              CartProduct cartProduct = CartProduct();
+                              cartProduct.size = size;
+                              cartProduct.quantity = 1;
+                              cartProduct.pid = product.id;
+
+                              CartModel.of(context).addCartItem(cartProduct);
+// Se não estiver logado retorna para o login
+                            } else {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => LoginScreen(),
+                                ),
+                              );
+                            }
+                          }
+                        : null,
                     child: Text(
-                      "Adicionar ao carrinho",
+                      UserModel.of(context).isLoggedIn()
+                          ? "ADICIONAR AO CARRINHO"
+                          : "FAÇA LOGIN PARA COMPRAR",
                       style: TextStyle(fontSize: 18.0),
                     ),
                     style: ElevatedButton.styleFrom(
