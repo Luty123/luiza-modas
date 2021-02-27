@@ -6,6 +6,8 @@ import 'package:loja/models/cart_model.dart';
 import 'package:loja/models/user_model.dart';
 import 'package:loja/screens/login_screen.dart';
 
+import 'cart_screen.dart';
+
 class ProductScreen extends StatefulWidget {
   final ProductData product;
   ProductScreen(this.product);
@@ -134,6 +136,11 @@ class _ProductScreenState extends State<ProductScreen> {
                               cartProduct.pid = product.id;
 
                               CartModel.of(context).addCartItem(cartProduct);
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => CartScreen(),
+                                ),
+                              );
 // Se não estiver logado retorna para o login
                             } else {
                               Navigator.of(context).push(
