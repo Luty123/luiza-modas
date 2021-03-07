@@ -1,9 +1,8 @@
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loja/datas/cart_product.dart';
 import 'package:loja/datas/product_data.dart';
+import 'package:loja/models/cart_model.dart';
 
 class CartTile extends StatelessWidget {
   final CartProduct cartProduct;
@@ -11,7 +10,7 @@ class CartTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget _buildContent() {
-      Row(
+      return Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Container(
@@ -51,14 +50,22 @@ class CartTile extends StatelessWidget {
                       IconButton(
                           icon: Icon(Icons.remove),
                           color: Theme.of(context).primaryColor,
-                          onPressed: cartProduct.quantity > 1 ? () {} : null),
+                          onPressed: cartProduct.quantity > 1
+                              ? () {
+                                  CartModel.of(context).decProduct(cartProduct);
+                                }
+                              : null),
                       Text(cartProduct.quantity.toString()),
                       IconButton(
                           icon: Icon(Icons.add),
                           color: Theme.of(context).primaryColor,
-                          onPressed: () {}),
+                          onPressed: () {
+                            CartModel.of(context).incProduct(cartProduct);
+                          }),
                       FlatButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          CartModel.of(context).removeCartItem(cartProduct);
+                        },
                         child: Text("Remover"),
                         color: Colors.grey[500],
                       )
@@ -73,7 +80,7 @@ class CartTile extends StatelessWidget {
     }
 
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+      margin: EdgeInsets.symmetric(horizontal: 0.0, vertical: 4.0),
       child: cartProduct.productData == null
           ? FutureBuilder<DocumentSnapshot>(
               future: FirebaseFirestore.instance

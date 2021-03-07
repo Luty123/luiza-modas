@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:loja/models/cart_model.dart';
 import 'package:loja/models/user_model.dart';
 import 'package:loja/screens/login_screen.dart';
-import 'package:loja/tiles/carat_tile.dart';
+import 'package:loja/tiles/cart_tile.dart';
+//import 'package:loja/tiles/carat_tile.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class CartScreen extends StatelessWidget {
