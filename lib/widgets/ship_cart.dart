@@ -18,7 +18,9 @@ class ShipCard extends StatelessWidget {
             padding: EdgeInsets.all(8.0),
             child: TextFormField(
               decoration: InputDecoration(
-                  border: OutlineInputBorder(), hintText: "Digite seu CEP"),
+                  border: OutlineInputBorder(),
+                  hintText:
+                      "Desculpe! Serviço indisponível no momento"), // Trocar por "Digite seu CEP quando a geolocalização for corrigidad"
               initialValue: "",
               onFieldSubmitted: (text) {},
             ),

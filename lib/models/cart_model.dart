@@ -68,11 +68,40 @@ class CartModel extends Model {
     notifyListeners();
   }
 
-  void setCoupon(String couponCode, int descountPerecentage) {
+  void setCoupon(String couponCode, int discountPercentage) {
     this.couponCode = couponCode;
     this.discountPercentage = discountPercentage;
 
     notifyListeners();
+  }
+
+// Função para atualizar os preços no momento da compilação / Widget _buildContent() em cart_tile
+  void updatePrice() {
+    notifyListeners();
+  }
+
+// Função para retornar o subtotal
+  double getProductsPrice() {
+    double price = 0.0;
+    for (CartProduct c in products) {
+      if (c.productData != null)
+        price +=
+            c.quantity * c.productData.price; // Quantidade do produto * preço
+    }
+    return price;
+  }
+
+// Função para retornar o desconto
+  double getDiscount() {
+    return getProductsPrice() *
+        discountPercentage /
+        100; // Quantidade do desconto/100 * preço do produto
+  }
+
+// Função para retornar o valor da entrega
+  double getShipPrice() {
+    // Calcular frete ainda não concluido, nesse caso custo = envio fixo
+    return 10.0;
   }
 
   void _loadCartItens() async {
