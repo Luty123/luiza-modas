@@ -100,8 +100,60 @@ class CartModel extends Model {
 
 // Função para retornar o valor da entrega
   double getShipPrice() {
-    // Calcular frete ainda não concluido, nesse caso custo = envio fixo
     return 10.0;
+  }
+
+// Função para finalizar o pedido passando as informações que devem ser salvas
+  Future<String> finishOrder() async {
+    if (products.length == 0) return null;
+    isLoading = true;
+    notifyListeners();
+    double productsPrice = getProductsPrice();
+    double shipPrice = getShipPrice();
+    double discount = getDiscount();
+
+    // Transformar e recuperar o id do pedido. Salvar em Order (firebase) e obter a referencia (refOrder)
+
+    DocumentReference refOrder =
+        await FirebaseFirestore.instance.collection("orders").add(
+      {
+        "clientId": user.firebaseUser.uid,
+        "products": products.map((cartProduct) => cartProduct.toMap()).toList(),
+        "shipPrice": shipPrice,
+        "productsPrice": productsPrice,
+        "discount": discount,
+        "totalPrice": productsPrice - discount + shipPrice,
+        "status": 1
+      },
+    );
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(user.firebaseUser.uid)
+        .collection("orders")
+        .doc(refOrder.id)
+        .set(
+      {"orderId": refOrder.id},
+    );
+
+// Obter todos os produtos do carrinho do usuario e deletar
+    QuerySnapshot query = await FirebaseFirestore.instance
+        .collection("user")
+        .doc(user.firebaseUser.uid)
+        .collection("cart")
+        .get();
+
+    for (DocumentSnapshot doc in query.docs) {
+      doc.reference.delete();
+    }
+// Limpar a lista local de produtos
+    products.clear();
+// Limpar o desconto aplicado
+    couponCode = null;
+    discountPercentage = 0;
+
+    isLoading = false;
+    notifyListeners();
+    return refOrder.id;
   }
 
   void _loadCartItens() async {
