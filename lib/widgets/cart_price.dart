@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loja/models/cart_model.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:search_cep/search_cep.dart';
 
 class CartPrice extends StatelessWidget {
   final VoidCallback buy;

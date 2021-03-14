@@ -20,7 +20,7 @@ class ShipCard extends StatelessWidget {
               decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText:
-                      "Desculpe! Serviço indisponível no momento"), // Trocar por "Digite seu CEP quando a geolocalização for corrigidad"
+                      "Desculpe! Serviço indisponível no momento"), // Trocar por "Digite seu CEP quando a geolocalização for corrigida"
               initialValue: "",
               onFieldSubmitted: (text) {},
             ),

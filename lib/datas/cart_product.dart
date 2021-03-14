@@ -30,7 +30,8 @@ class CartProduct {
       "pid": pid,
       "quantity": quantity,
       "size": size,
-      //"product": productData.toResumedMap() // Função para armazenar apenas um resumo do produto (product_data.dart)
+      "product": productData
+          .toResumedMap() // Função para armazenar apenas um resumo do produto (product_data.dart)
     };
   }
 }

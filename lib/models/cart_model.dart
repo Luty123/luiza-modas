@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:loja/datas/cart_product.dart';
 import 'package:loja/models/user_model.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:search_cep/search_cep.dart';
 
 class CartModel extends Model {
   UserModel user;

@@ -22,6 +22,7 @@ environment:
 
 dependencies:
   cloud_firestore: ^0.16.0
+  search_cep: ^3.0.0+2
   firebase_core: ^0.7.0
   flutter_staggered_grid_view: ^0.3.4
   carousel_pro: ^1.0.0
