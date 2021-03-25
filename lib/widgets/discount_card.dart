@@ -26,7 +26,8 @@ class DiscountCard extends StatelessWidget {
               onFieldSubmitted: (text) {
                 FirebaseFirestore.instance
                     .collection("coupons")
-                    .doc(text)
+                    .doc(text
+                        .toUpperCase()) // envia o texto do cupom em maiusculo para comparar
                     .get()
                     .then((docSnap) {
                   if (docSnap.data() != null) {
