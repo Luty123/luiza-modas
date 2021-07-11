@@ -1,7 +1,7 @@
-# loja virtual - Modelo usado, loja de vestuário denominada nayra_fashion_village.
+# loja virtual - loja de vestuário denominada Luíza Modas.
 
 Projeto de aplicação mobile de uma loja virtual.
-# Nayra Fashion Village - Desenvolvido por Luciano Paiva Eufrázio.
+# Luíza Modas - Desenvolvido por Luciano Paiva Eufrázio.
 02/2021 -
 
 Projeto desenvolvido em Dart, utilizando o Framework Flutter com integração da plataforma de auxílio ao desenvolvimento Firebase.
@@ -33,14 +33,14 @@ o	Para mais informações consultar https://gitforwindows.org/
 
 2.	Obtendo o projeto
 
-•	O projeto pode ser acessado através da plataforma de gerencia de versionamento Github, o link para o projeto é https://github.com/Luty123/nayra_modas 
+•	O projeto pode ser acessado através da plataforma de gerencia de versionamento Github, o link para o projeto é https://github.com/Luty123/luiza-modas.git
 •	Crie uma pasta localmente no seu sistema, 
 •	Através do link no GitHub, clone o projeto
 o	Sugestão, escolha o método HTTPS, copie o link passado
 •	Abra o Git Bash ou outro terminal de sua preferência na pasta local criada.
 o	Você pode abrir seu editor de código e executar os passos seguintes nele, caso ele possua um terminal de acesso que possibilite a utilização de comando Git
 •	Execute o comando “git clone” e cole o link copiado do Github, como no exemplo abaixo
-o	git clone https://github.com/Luty123/nayra_modas.git 
+o	git clone https://github.com/Luty123/luiza-modas.git 
 
 3.	Configurando o projeto
 •	Abra o projeto clonado no seu editor de código.

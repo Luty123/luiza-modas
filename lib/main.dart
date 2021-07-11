@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loja/helpers/Theme.dart';
 import 'package:loja/models/cart_model.dart';
 import 'package:loja/models/user_model.dart';
 import 'package:loja/screens/home_screen.dart';
@@ -24,11 +25,11 @@ class MyApp extends StatelessWidget {
           return ScopedModel<CartModel>(
             model: CartModel(model),
             child: MaterialApp(
-              title: 'Nayra\'s Fashion Village',
+              title: 'Luíza Modas',
               theme: ThemeData(
                   primarySwatch: Colors.blue,
-                  primaryColor: Color.fromARGB(255, 4, 125, 141),
-                  secondaryHeaderColor: Color.fromARGB(255, 211, 118, 130)),
+                  primaryColor: MaterialColors.primary,
+                  secondaryHeaderColor: MaterialColors.label),
               debugShowCheckedModeBanner: false,
               home: HomeScreen(),
             ),
