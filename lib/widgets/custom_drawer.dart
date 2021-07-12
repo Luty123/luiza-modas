@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:loja/helpers/Theme.dart';
+import 'package:loja/helpers/oval-right-clipper.dart';
 import 'package:loja/models/user_model.dart';
 import 'package:loja/screens/login_screen.dart';
 import 'package:loja/tiles/drawer_tile.dart';
@@ -6,6 +8,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 class CustomDrawer extends StatelessWidget {
   final PageController pageController;
+  final Color active = Colors.black;
   CustomDrawer(this.pageController);
   @override
 // Gradiente
@@ -18,82 +21,193 @@ class CustomDrawer extends StatelessWidget {
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         );
 // Menu Drawer e lista de opções
-    return Drawer(
-      child: Stack(
-        children: <Widget>[
-          _buildDrawerBack(),
-          ListView(
-            padding: EdgeInsets.only(left: 32.0, top: 16.0),
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(bottom: 8.0),
-                padding: EdgeInsets.fromLTRB(0.0, 16.0, 16.0, 8.0),
-                height: 170.0,
-                child: Stack(
-                  children: <Widget>[
-                    Positioned(
-                      top: 8.0,
-                      left: 0.0,
-                      child: Text(
-                        "Luíza Modas",
-                        style: TextStyle(
-                            fontSize: 34.0, fontWeight: FontWeight.bold),
+    return ClipPath(
+      clipper: OvalRightBorderClipper(),
+      child: Drawer(
+        child: Column(
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: MaterialColors.drawerHeader),
+              child: Container(
+                //padding: EdgeInsets.symmetric(horizontal: 28.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CircleAvatar(
+                      minRadius: 20,
+                      maxRadius: 25,
+                      backgroundImage: NetworkImage(
+                          "https://firebasestorage.googleapis.com/v0/b/loja-932f6.appspot.com/o/logo.jpg?alt=media&token=e65e69fd-c5c7-416d-8d41-ef571754b790"),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0, top: 8),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 6),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    color: MaterialColors.label),
+                                child: Text("Loja Virtual Luíza Modas",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 16))),
+                          ),
+                          Row(
+                            children: [
+                              Icon(Icons.star_border,
+                                  color: MaterialColors.warning, size: 20)
+                            ],
+                          )
+                        ],
                       ),
                     ),
-// Mensagem do topo
-                    Positioned(
-                        left: 0.0,
-                        bottom: 0.0,
-                        child: ScopedModelDescendant<UserModel>(
-                          builder: (context, child, model) {
-                            //print(model.isLoggedIn());
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  "Olá, ${!model.isLoggedIn() ? "" : model.userData["name"]}",
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 0.0, top: 0.0),
+                      child: ScopedModelDescendant<UserModel>(
+                        builder: (context, child, model) {
+                          //print(model.isLoggedIn());
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                "Olá, ${!model.isLoggedIn() ? "" : model.userData["name"]}",
+                                style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: MaterialColors.defaultButton),
+                              ),
+// Função  para detectar o entre ou cadastre-se
+                              GestureDetector(
+                                child: Text(
+                                  !model.isLoggedIn()
+                                      ? "Entre ou cadastre-se"
+                                      : "Sair",
                                   style: TextStyle(
+                                      color: MaterialColors.info,
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.bold),
                                 ),
-// Função  para detectar o entre ou cadastre-se
-                                GestureDetector(
-                                  child: Text(
-                                    !model.isLoggedIn()
-                                        ? "Entre ou cadastre-se >"
-                                        : "Sair",
-                                    style: TextStyle(
-                                        color: Theme.of(context).primaryColor,
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  onTap: () {
-                                    if (!model.isLoggedIn())
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) => LoginScreen(),
-                                        ),
-                                      );
-                                    else
-                                      model.signOut();
-                                  },
-                                )
-                              ],
-                            );
-                          },
-                        ))
+                                onTap: () {
+                                  if (!model.isLoggedIn())
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => LoginScreen(),
+                                      ),
+                                    );
+                                  else
+                                    model.signOut();
+                                },
+                              )
+                            ],
+                          );
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
-              Divider(),
-              DrawerTile(Icons.home, "Inicio", pageController, 0),
-              DrawerTile(Icons.list, "Produtos", pageController, 1),
-              DrawerTile(Icons.location_on, "Lojas", pageController, 2),
-              DrawerTile(
-                  Icons.playlist_add_check, "Meus Pedidos", pageController, 3),
-            ],
-          )
-        ],
+            ),
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.only(top: 8, left: 8, right: 8),
+                children: [
+                  DrawerTile(
+                    Icons.home,
+                    "Inicio",
+                    pageController,
+                    0,
+                  ),
+                  DrawerTile(Icons.list, "Produtos", pageController, 1),
+                  DrawerTile(Icons.location_on, "Lojas", pageController, 2),
+                  DrawerTile(Icons.playlist_add_check, "Meus Pedidos",
+                      pageController, 3),
+                  //DrawerTile(Icons.list, "Perfil", pageController, 4),
+                  //DrawerTile(Icons.list, "Contato", pageController, 5),
+                  //DrawerTile(Icons.list, "Sobre", pageController, 6),
+                ],
+              ),
+            )
+          ],
+        ),
+        /*Stack(
+          children: <Widget>[
+            _buildDrawerBack(),
+            ListView(
+              padding: EdgeInsets.only(left: 32.0, top: 16.0),
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(bottom: 8.0),
+                  padding: EdgeInsets.fromLTRB(0.0, 16.0, 16.0, 8.0),
+                  height: 170.0,
+                  child: Stack(
+                    children: <Widget>[
+                      Positioned(
+                        top: 8.0,
+                        left: 0.0,
+                        child: Text(
+                          "Luíza Modas",
+                          style: TextStyle(
+                              fontSize: 34.0, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+// Mensagem do topo
+                      Positioned(
+                          left: 0.0,
+                          bottom: 0.0,
+                          child: ScopedModelDescendant<UserModel>(
+                            builder: (context, child, model) {
+                              //print(model.isLoggedIn());
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    "Olá, ${!model.isLoggedIn() ? "" : model.userData["name"]}",
+                                    style: TextStyle(
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+// Função  para detectar o entre ou cadastre-se
+                                  GestureDetector(
+                                    child: Text(
+                                      !model.isLoggedIn()
+                                          ? "Entre ou cadastre-se >"
+                                          : "Sair",
+                                      style: TextStyle(
+                                          color: Theme.of(context).primaryColor,
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    onTap: () {
+                                      if (!model.isLoggedIn())
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) => LoginScreen(),
+                                          ),
+                                        );
+                                      else
+                                        model.signOut();
+                                    },
+                                  )
+                                ],
+                              );
+                            },
+                          ))
+                    ],
+                  ),
+                ),
+                Divider(),
+                DrawerTile(Icons.home, "Inicio", pageController, 0),
+                DrawerTile(Icons.list, "Produtos", pageController, 1),
+                DrawerTile(Icons.location_on, "Lojas", pageController, 2),
+                DrawerTile(Icons.playlist_add_check, "Meus Pedidos",
+                    pageController, 3),
+              ],
+            )
+          ],
+        ),*/
       ),
     );
   }

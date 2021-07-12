@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:loja/helpers/Theme.dart';
 
 class DrawerTile extends StatelessWidget {
   final IconData icon;
   final String text;
   final PageController controller;
   final int page;
+  //final bool isSelected;
+  //final Color iconColor = Colors.black;
 
-  DrawerTile(this.icon, this.text, this.controller, this.page);
+  DrawerTile(
+    this.icon,
+    this.text,
+    this.controller,
+    this.page,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +28,28 @@ class DrawerTile extends StatelessWidget {
         },
 // Lista do menu - opções
         child: Container(
-          height: 80.0,
+          height: 45.0,
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          margin: EdgeInsets.only(bottom: 8.0),
+          decoration: BoxDecoration(
+            color: controller.page.round() == page
+                ? MaterialColors.active
+                : Colors.transparent,
+            borderRadius: BorderRadius.all(
+              Radius.circular(4),
+            ),
+          ),
           child: Row(
             children: <Widget>[
-              Icon(
-                icon,
-                size: 35.0,
-                color: controller.page.round() == page
-                    ? Theme.of(context).primaryColor
-                    : Colors.grey[700],
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Icon(
+                  icon,
+                  size: 20.0,
+                  color: controller.page.round() == page
+                      ? Colors.white
+                      : Colors.black,
+                ),
               ),
               SizedBox(
                 width: 30.0,
@@ -36,10 +57,10 @@ class DrawerTile extends StatelessWidget {
               Text(
                 text,
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: 16.0,
                   color: controller.page.round() == page
-                      ? Theme.of(context).primaryColor
-                      : Colors.grey[700],
+                      ? Colors.white
+                      : Colors.black,
                 ),
               )
             ],
