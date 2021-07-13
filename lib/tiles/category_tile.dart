@@ -11,7 +11,7 @@ class CategoryTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25.0),
+        borderRadius: BorderRadius.circular(70.0),
         color: MaterialColors.priceColor,
       ),
       width: double.infinity,
@@ -23,7 +23,7 @@ class CategoryTile extends StatelessWidget {
         height: 50,
         margin: EdgeInsets.all(3),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25.0),
+          borderRadius: BorderRadius.circular(70.0),
           border: Border.all(width: 2, color: MaterialColors.primary),
         ),
         child: Container(
