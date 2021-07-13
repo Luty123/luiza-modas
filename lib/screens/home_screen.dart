@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loja/helpers/Theme.dart';
 import 'package:loja/tabs/home_tab.dart';
 import 'package:loja/tabs/orders_tab.dart';
 import 'package:loja/tabs/places_tab.dart';
@@ -10,6 +11,7 @@ class HomeScreen extends StatelessWidget {
   //const HomeScreen({Key key}) : super(key: key);
   final _pageController =
       PageController(); //Controlador de pagina para não deslizar lateralmente
+
   @override
   Widget build(BuildContext context) {
     //Chamar _pageCrontoller.jumpToPage, para decidir em qual pagina iniciar
@@ -27,7 +29,7 @@ class HomeScreen extends StatelessWidget {
           appBar: AppBar(
             title: Text("Categorias"),
             centerTitle: true,
-            backgroundColor: Color.fromARGB(255, 211, 118, 130),
+            backgroundColor: MaterialColors.primary,
           ),
           drawer: CustomDrawer(_pageController),
           body: ProductsTab(),
@@ -40,6 +42,7 @@ class HomeScreen extends StatelessWidget {
           ),
           body: PlacesTab(),
           drawer: CustomDrawer(_pageController),
+          backgroundColor: MaterialColors.primary,
         ),
         Scaffold(
           appBar: AppBar(
@@ -48,6 +51,7 @@ class HomeScreen extends StatelessWidget {
           ),
           body: OrdersTab(),
           drawer: CustomDrawer(_pageController),
+          backgroundColor: MaterialColors.border,
         )
       ],
     );
