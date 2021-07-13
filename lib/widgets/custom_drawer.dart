@@ -38,7 +38,7 @@ class CustomDrawer extends StatelessWidget {
                       minRadius: 20,
                       maxRadius: 25,
                       backgroundImage: NetworkImage(
-                          "https://firebasestorage.googleapis.com/v0/b/loja-932f6.appspot.com/o/logo.jpg?alt=media&token=e65e69fd-c5c7-416d-8d41-ef571754b790"),
+                          "https://firebasestorage.googleapis.com/v0/b/loja-932f6.appspot.com/o/logo%2Flogo.png?alt=media&token=63ec83ea-eefb-4706-9f78-216af289a870"),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0, top: 8),
