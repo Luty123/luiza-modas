@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loja/helpers/Theme.dart';
 import 'package:loja/helpers/assets.dart';
+import 'package:loja/helpers/validators.dart';
 import 'package:loja/models/user_model.dart';
 import 'package:loja/screens/signup_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -31,7 +32,9 @@ class _LoginScreenState extends State<LoginScreen> {
         builder: (context, child, model) {
           if (model.isLoading)
             return Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                  //valueColor: ,
+                  ),
             );
           return Form(
             key: _formKey,
@@ -59,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
                           SizedBox(
-                            height: 50.0,
+                            height: 5.0,
                           ),
                           Text(
                             "Bem vindo(a) a Luíza Modas",
@@ -70,14 +73,15 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 10.0,
                           ),
                           Text(
-                            "Faça seu Login",
+                            "Faça login ou crie uma nova conta",
                             style:
                                 TextStyle(color: Colors.white, fontSize: 16.0),
                           ),
                           SizedBox(
-                            height: 100.0,
+                            height: 250.0,
                           ),
                           TextFormField(
+                            enabled: !model.isLoading,
                             controller: _emailController,
                             style: TextStyle(color: Colors.white),
                             decoration: InputDecoration(
@@ -88,8 +92,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             keyboardType: TextInputType.emailAddress,
-                            validator: (text) {
-                              if (text.isEmpty || !text.contains("@")) {
+                            validator: (email) {
+                              if (!emailValid(email)) return 'E-mail invalido';
+                              if (email.isEmpty || !email.contains("@")) {
                                 return "E-mail inválido!";
                               }
                               return "null";
@@ -99,6 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 10.0,
                           ),
                           TextFormField(
+                            enabled: !model.isLoading,
                             controller: _passController,
                             obscureText: true,
                             style: TextStyle(color: Colors.white),
@@ -109,11 +115,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 borderSide: BorderSide(color: Colors.white54),
                               ),
                             ),
-                            validator: (text) {
-                              if (text.isEmpty || text.length < 8) {
+                            validator: (pass) {
+                              if (pass.isEmpty || pass.length < 8) {
                                 return "Senha inválida!";
-                              }
-                              return "null";
+                              } else
+                                return "null";
                             },
                           ),
                           SizedBox(
@@ -138,7 +144,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     SnackBar(
                                       content: Text(
                                           "Email para recuperação de senha enviado!"),
-                                      backgroundColor: Colors.greenAccent,
+                                      backgroundColor:
+                                          MaterialColors.socialDribbble,
                                       duration: Duration(seconds: 3),
                                     ),
                                   );
@@ -151,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           SizedBox(
-                            height: 100.0,
+                            height: 20.0,
                           ),
                           SizedBox(
                             width: double.infinity,
@@ -233,7 +240,7 @@ class _LoginScreenState extends State<LoginScreen> {
     _scaffoldKey.currentState.showSnackBar(
       SnackBar(
         content: Text("Falha ao Entrar!"),
-        backgroundColor: Colors.redAccent,
+        backgroundColor: MaterialColors.error,
         duration: Duration(seconds: 3),
       ),
     );

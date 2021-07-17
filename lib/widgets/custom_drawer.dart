@@ -35,8 +35,7 @@ class CustomDrawer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CircleAvatar(
-                      minRadius: 20,
-                      maxRadius: 25,
+                      radius: 30.0,
                       backgroundImage: NetworkImage(
                           "https://firebasestorage.googleapis.com/v0/b/loja-932f6.appspot.com/o/logo%2Flogo.png?alt=media&token=63ec83ea-eefb-4706-9f78-216af289a870"),
                     ),

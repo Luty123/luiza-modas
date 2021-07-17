@@ -60,15 +60,22 @@ class UserModel extends Model {
       firebaseUser = credentials.user;
 
       await _loadCurrentUser();
+      await Future.delayed(Duration(seconds: 3));
 
       onSuccess();
       isLoading = false;
       notifyListeners();
     }).catchError((e) {
+      //print('${e.code}');
       onFail();
       isLoading = false;
       notifyListeners();
-    });
+    })
+          ..whenComplete(() {
+            onFail();
+            isLoading = false;
+            notifyListeners();
+          });
   }
 
   void recoverPass(String email) {
