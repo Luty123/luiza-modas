@@ -34,10 +34,16 @@ class CustomDrawer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CircleAvatar(
-                      radius: 30.0,
-                      backgroundImage: NetworkImage(
-                          "https://firebasestorage.googleapis.com/v0/b/loja-932f6.appspot.com/o/logo%2Flogo.png?alt=media&token=63ec83ea-eefb-4706-9f78-216af289a870"),
+                    GestureDetector(
+                      onTap: () => _showSecondPage(context),
+                      child: Hero(
+                        tag: 'luiza-modas',
+                        child: CircleAvatar(
+                          radius: 30.0,
+                          backgroundImage: NetworkImage(
+                              "https://firebasestorage.googleapis.com/v0/b/loja-932f6.appspot.com/o/logo%2Flogo.png?alt=media&token=63ec83ea-eefb-4706-9f78-216af289a870"),
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0, top: 8),
@@ -136,4 +142,33 @@ class CustomDrawer extends StatelessWidget {
       ),
     );
   }
+}
+
+void _showSecondPage(BuildContext context) {
+  Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (ctx) => Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "Luíza Modas",
+            style: TextStyle(color: MaterialColors.primary),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.white30,
+          elevation: 0,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ),
+        body: Center(
+          child: Hero(
+            tag: 'luiza-modas',
+            child: Image.network(
+                "https://firebasestorage.googleapis.com/v0/b/loja-932f6.appspot.com/o/logo%2Flogo.png?alt=media&token=63ec83ea-eefb-4706-9f78-216af289a870"),
+          ),
+        ),
+      ),
+    ),
+  );
 }

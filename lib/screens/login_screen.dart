@@ -64,18 +64,24 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(
                             height: 5.0,
                           ),
-                          Text(
-                            "Bem vindo(a) a Luíza Modas",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 28.0),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Bem vindo(a) a Luíza Modas",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 28.0),
+                            ),
                           ),
                           SizedBox(
                             height: 10.0,
                           ),
-                          Text(
-                            "Faça login ou crie uma nova conta",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 16.0),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Faça login ou crie uma nova conta",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 16.0),
+                            ),
                           ),
                           SizedBox(
                             height: 250.0,
