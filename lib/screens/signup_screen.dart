@@ -25,8 +25,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _contact2Controller = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: MaterialColors.drawerHeader,
       key: _scaffoldKey,
@@ -47,7 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               padding: EdgeInsets.all(32.0),
               children: <Widget>[
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.4,
+                  height: height * 0.4,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [
                       MaterialColors.drawerHeader,
