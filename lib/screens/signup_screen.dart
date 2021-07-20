@@ -511,12 +511,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 40.0,
                     child: ElevatedButton(
                       onPressed: () {
+
                         if (_formKey.currentState.validate()) {
-                          if (_pass2Controller != _passController)
+                          if (_pass2Controller.text != _passController.text)
                             return; // testar as senhas
                           Map<String, dynamic> userData = {
                             "name": _name1Controller.text,
-                            "secondname": _name2Controller,
+                            "secondname": _name2Controller.text,
                             "email": _emailController.text,
                             "addresstret": _addressStreetController.text,
                             "addressnumber": _addressNumberController.text,
