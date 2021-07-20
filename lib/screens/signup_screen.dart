@@ -516,7 +516,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             "secondname": _name2Controller,
                             "email": _emailController.text,
                             "addresstret": _addressStreetController.text,
-                            "addressnumber": _addressStreetController.text,
+                            "addressnumber": _addressNumberController.text,
                             "addressdistrict": _addressDistrictController.text,
                             "addresscomplement":
                                 _adressComplementController.text,
