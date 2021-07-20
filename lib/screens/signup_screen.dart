@@ -25,8 +25,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _contact2Controller = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: MaterialColors.drawerHeader,
       key: _scaffoldKey,
@@ -47,7 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               padding: EdgeInsets.all(32.0),
               children: <Widget>[
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.4,
+                  height: height * 0.4,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [
                       MaterialColors.drawerHeader,
@@ -508,12 +511,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 40.0,
                     child: ElevatedButton(
                       onPressed: () {
+
                         if (_formKey.currentState.validate()) {
-                          if (_pass2Controller != _passController)
+                          if (_pass2Controller.text != _passController.text)
                             return; // testar as senhas
                           Map<String, dynamic> userData = {
                             "name": _name1Controller.text,
-                            "secondname": _name2Controller,
+                            "secondname": _name2Controller.text,
                             "email": _emailController.text,
                             "addresstret": _addressStreetController.text,
                             "addressnumber": _addressNumberController.text,
