@@ -27,7 +27,7 @@ class CustomDrawer extends StatelessWidget {
         child: Column(
           children: [
             DrawerHeader(
-              decoration: BoxDecoration(color: MaterialColors.drawerHeader),
+              decoration: BoxDecoration(color: MaterialColors.gradientStart),
               child: Container(
                 //padding: EdgeInsets.symmetric(horizontal: 28.0),
                 child: Column(
@@ -91,7 +91,7 @@ class CustomDrawer extends StatelessWidget {
                                       ? "Entre ou cadastre-se"
                                       : "Sair",
                                   style: TextStyle(
-                                      color: MaterialColors.info,
+                                      color: MaterialColors.socialTwitter,
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.bold),
                                 ),
