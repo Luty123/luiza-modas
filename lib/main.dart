@@ -4,8 +4,10 @@ import 'package:loja/models/cart_model.dart';
 import 'package:loja/models/user_model.dart';
 import 'package:loja/screens/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:lottie/lottie.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+//Lottie.asset('assets/68367-newspaper-loading.json');
 void main() async {
 // Inicializar o firebase
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +21,7 @@ class MyApp extends StatelessWidget {
 // Scoped do usuario
     return ScopedModel<UserModel>(
       model: UserModel(),
+
 // Scoped do carrinho
       child: ScopedModelDescendant<UserModel>(
         builder: (context, child, model) {
