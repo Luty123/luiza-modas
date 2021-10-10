@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loja/datas/product_data.dart';
+import 'package:loja/helpers/Theme.dart';
 import 'package:loja/tiles/product_tile.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -14,9 +15,9 @@ class CategoryScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(snapshot.data()["title"]),
           centerTitle: true,
-          backgroundColor: Color.fromARGB(255, 211, 118, 130),
+          backgroundColor: MaterialColors.signStartGradient,
           bottom: TabBar(
-            indicatorColor: Colors.white,
+            indicatorColor: MaterialColors.label,
             tabs: <Widget>[
               Tab(
                 icon: Icon(Icons.grid_on),
@@ -32,6 +33,7 @@ class CategoryScreen extends StatelessWidget {
               .collection("products")
               .doc(snapshot.id)
               .collection("itens")
+              .orderBy("title")
               .get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData)

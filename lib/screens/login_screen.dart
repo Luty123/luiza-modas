@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          backgroundColor: MaterialColors.primary,
+          backgroundColor: MaterialColors.signStartGradient,
           title: Text("ENTRAR"),
           centerTitle: true,
           elevation: 5,

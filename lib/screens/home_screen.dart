@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
           appBar: AppBar(
             title: Text("Categorias"),
             centerTitle: true,
-            backgroundColor: MaterialColors.primary,
+            backgroundColor: MaterialColors.signStartGradient,
           ),
           drawer: CustomDrawer(_pageController),
           body: ProductsTab(),
@@ -39,19 +39,21 @@ class HomeScreen extends StatelessWidget {
           appBar: AppBar(
             title: Text("Lojas"),
             centerTitle: true,
+            backgroundColor: MaterialColors.signStartGradient,
           ),
           body: PlacesTab(),
           drawer: CustomDrawer(_pageController),
-          backgroundColor: MaterialColors.primary,
+          backgroundColor: MaterialColors.active,
         ),
         Scaffold(
           appBar: AppBar(
             title: Text("Meus pedidos"),
             centerTitle: true,
+            backgroundColor: MaterialColors.signStartGradient,
           ),
           body: OrdersTab(),
           drawer: CustomDrawer(_pageController),
-          backgroundColor: MaterialColors.border,
+          backgroundColor: MaterialColors.active,
         )
       ],
     );

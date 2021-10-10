@@ -33,6 +33,7 @@ dependencies:
   google_fonts: ^1.1.2
   cupertino_icons: ^1.0.0
   lottie: ^1.1.0
+  provider: ^6.0.1
 
   flutter:
     sdk: flutter

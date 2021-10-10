@@ -40,7 +40,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           backgroundColor: Colors.transparent,
           key: _scaffoldKey,
           appBar: AppBar(
-            backgroundColor: MaterialColors.primary,
+            backgroundColor: MaterialColors.signStartGradient,
             title: Text("CRIAR CONTA"),
             centerTitle: true,
           ),

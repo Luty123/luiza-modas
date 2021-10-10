@@ -10,35 +10,40 @@ class CategoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(70.0),
-        color: MaterialColors.priceColor,
-      ),
-      width: double.infinity,
-      height: 110,
-      margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+      decoration:
+          new BoxDecoration(color: MaterialColors.label.withOpacity(0.1)),
       child: Container(
-        width: 50,
-        height: 50,
-        margin: EdgeInsets.all(3),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(70.0),
-          border: Border.all(width: 2, color: MaterialColors.primary),
-        ),
+        width: double.infinity,
+        height: 100,
+        margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
         child: Container(
-          margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-          child: ListTile(
-            leading: CircleAvatar(
-              radius: 35.0,
-              backgroundColor: Colors.transparent,
-              backgroundImage: NetworkImage(snapshot.data()["icon"]),
+          width: 50,
+          height: 50,
+          margin: EdgeInsets.all(0.1),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20.0),
+            border: Border.all(width: 3, color: MaterialColors.primary),
+          ),
+          child: Container(
+            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
+            child: ListTile(
+              leading: CircleAvatar(
+                radius: 30.0,
+                backgroundColor: MaterialColors.primary,
+                child: CircleAvatar(
+                  radius: 25.0,
+                  backgroundColor: Colors.white,
+                  backgroundImage: NetworkImage(snapshot.data()["icon"]),
+                ),
+              ),
+              title: Text(snapshot.data()["title"]),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => CategoryScreen(snapshot)));
+              },
             ),
-            title: Text(snapshot.data()["title"]),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => CategoryScreen(snapshot)));
-            },
           ),
         ),
       ),

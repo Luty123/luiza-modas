@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:loja/helpers/Theme.dart';
+import 'package:loja/models/home_model.dart';
+import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class HomeTab extends StatelessWidget {
@@ -31,12 +33,13 @@ class HomeTab extends StatelessWidget {
               backgroundColor: Colors.transparent,
               elevation: 0,
               flexibleSpace: FlexibleSpaceBar(
-                title: const Text("Novidades"),
+                title: const Text("Destaques"),
                 centerTitle: true,
               ),
             ),
+
 // Importando imagens do firebase
-            FutureBuilder<QuerySnapshot>(
+            /*FutureBuilder<QuerySnapshot>(
               future: FirebaseFirestore.instance
                   .collection("home")
                   .orderBy("posicao")
@@ -70,9 +73,9 @@ class HomeTab extends StatelessWidget {
                     }).toList(),
                   );
               },
-            )
+            )*/
           ],
-        )
+        ),
       ],
     );
   }

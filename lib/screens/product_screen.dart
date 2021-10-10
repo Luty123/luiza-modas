@@ -2,6 +2,7 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:loja/datas/cart_product.dart';
 import 'package:loja/datas/product_data.dart';
+import 'package:loja/helpers/Theme.dart';
 import 'package:loja/models/cart_model.dart';
 import 'package:loja/models/user_model.dart';
 import 'package:loja/screens/login_screen.dart';
@@ -21,12 +22,12 @@ class _ProductScreenState extends State<ProductScreen> {
   _ProductScreenState(this.product);
   @override
   Widget build(BuildContext context) {
-    final Color primaryColor = Theme.of(context).primaryColor;
+    final Color primaryColor = MaterialColors.primary;
     return Scaffold(
       appBar: AppBar(
         title: Text(product.title),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 211, 118, 130),
+        backgroundColor: MaterialColors.signStartGradient,
       ),
       body: ListView(
         children: <Widget>[
@@ -36,12 +37,12 @@ class _ProductScreenState extends State<ProductScreen> {
               images: product.images.map((url) {
                 return NetworkImage(url);
               }).toList(),
-              dotSize: 4.0,
+              dotSize: 8.0,
               dotSpacing: 12.0,
               dotBgColor: Colors.transparent,
-              dotColor: Color.fromARGB(255, 211, 118, 130),
+              dotColor: MaterialColors.label,
               autoplay: true,
-              autoplayDuration: Duration(seconds: 8),
+              autoplayDuration: Duration(seconds: 5),
             ),
           ),
           Padding(
@@ -59,7 +60,7 @@ class _ProductScreenState extends State<ProductScreen> {
                   style: TextStyle(
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold,
-                      color: primaryColor),
+                      color: MaterialColors.label),
                 ),
                 SizedBox(
                   height: 16.0,
@@ -109,7 +110,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                   BorderRadius.all(Radius.circular(4.0)),
                               border: Border.all(
                                   color: s == size
-                                      ? Color.fromARGB(255, 211, 118, 130)
+                                      ? MaterialColors.label
                                       : Colors.grey[500],
                                   width: 3.0)),
                           width: 50.0,
@@ -160,7 +161,10 @@ class _ProductScreenState extends State<ProductScreen> {
                       style: TextStyle(fontSize: 18.0),
                     ),
                     style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(255, 211, 118, 130)),
+                      primary: MaterialColors.label,
+                      shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0)),
+                    ),
                   ),
                 ),
                 SizedBox(
