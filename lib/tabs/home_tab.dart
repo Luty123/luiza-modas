@@ -1,14 +1,17 @@
 import 'dart:ui';
+import 'package:carousel_pro/carousel_pro.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:loja/helpers/Theme.dart';
-import 'package:loja/models/home_model.dart';
+import 'package:loja/helpers/assets.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 
 class HomeTab extends StatelessWidget {
   //final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
   @override
 // Gradiente da home
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class HomeTab extends StatelessWidget {
         _buildBodyBack(),
         CustomScrollView(
           slivers: <Widget>[
-            SliverAppBar(
+            new SliverAppBar(
               floating: true,
               pinned: false,
               snap: true, //false
@@ -36,6 +39,31 @@ class HomeTab extends StatelessWidget {
                 title: const Text("Destaques"),
                 centerTitle: true,
               ),
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                  margin: EdgeInsets.only(top: 20.0),
+                  color: MaterialColors.label,
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        MaterialButton(
+                            onPressed: () {},
+                            child: Text("Novidades".toUpperCase(),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold))),
+                        MaterialButton(
+                            onPressed: () {},
+                            child: Text("Ver".toUpperCase(),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w400))),
+                      ],
+                    ),
+                  )),
             ),
 
 // Importando imagens do firebase

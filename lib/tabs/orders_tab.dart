@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:loja/helpers/Theme.dart';
 import 'package:loja/models/user_model.dart';
 import 'package:loja/models/user_model.dart';
 import 'package:loja/screens/login_screen.dart';
@@ -44,7 +45,7 @@ class OrdersTab extends StatelessWidget {
             Icon(
               Icons.view_list_outlined,
               size: 80.0,
-              color: Theme.of(context).primaryColor,
+              color: MaterialColors.primary,
             ),
             SizedBox(
               height: 16.0,
@@ -70,8 +71,11 @@ class OrdersTab extends StatelessWidget {
                   style: TextStyle(fontSize: 18.0),
                 ),
                 style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                    ),
                     primary: Colors.white,
-                    backgroundColor: Theme.of(context).primaryColor)),
+                    backgroundColor: MaterialColors.label)),
           ],
         ),
       );

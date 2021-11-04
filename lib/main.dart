@@ -5,6 +5,7 @@ import 'package:loja/models/user_model.dart';
 import 'package:loja/screens/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 //Lottie.asset('assets/68367-newspaper-loading.json');

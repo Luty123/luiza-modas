@@ -46,15 +46,14 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: MaterialColors.active,
         ),
         Scaffold(
-          appBar: AppBar(
-            title: Text("Meus pedidos"),
-            centerTitle: true,
-            backgroundColor: MaterialColors.signStartGradient,
-          ),
-          body: OrdersTab(),
-          drawer: CustomDrawer(_pageController),
-          backgroundColor: MaterialColors.active,
-        )
+            appBar: AppBar(
+              title: Text("Meus pedidos"),
+              centerTitle: true,
+              backgroundColor: MaterialColors.signStartGradient,
+            ),
+            body: OrdersTab(),
+            drawer: CustomDrawer(_pageController),
+            backgroundColor: Colors.white)
       ],
     );
   }

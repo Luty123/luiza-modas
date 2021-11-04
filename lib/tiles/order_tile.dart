@@ -31,7 +31,8 @@ class OrderTile extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     "Codigo do pedido: ${snapshot.data.id}",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: 4.0,

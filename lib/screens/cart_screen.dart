@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loja/helpers/Theme.dart';
 import 'package:loja/models/cart_model.dart';
 import 'package:loja/models/user_model.dart';
 import 'package:loja/screens/login_screen.dart';
@@ -14,6 +15,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: MaterialColors.primary,
         title: Text("Meu carrinho"),
         centerTitle: true,
         actions: <Widget>[
@@ -76,8 +78,11 @@ class CartScreen extends StatelessWidget {
                       style: TextStyle(fontSize: 18.0),
                     ),
                     style: TextButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
                         primary: Colors.white,
-                        backgroundColor: Theme.of(context).primaryColor)),
+                        backgroundColor: MaterialColors.label)),
               ],
             ),
           );
