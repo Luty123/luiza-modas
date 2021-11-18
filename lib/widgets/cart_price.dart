@@ -90,8 +90,14 @@ class CartPrice extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: buy,
-                child: Text("Finalizar pedido!"),
+                child: Text(
+                  "Finalizar pedido!",
+                  style: TextStyle(fontSize: 18.0),
+                ),
                 style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
                   primary: Theme.of(context).primaryColor,
                   onPrimary: Colors.white, // Cor do texto
                 ),

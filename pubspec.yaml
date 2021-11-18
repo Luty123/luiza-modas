@@ -35,6 +35,7 @@ dependencies:
   lottie: ^1.1.0
   provider: ^6.0.1
   flutter_swiper_null_safety: ^1.0.2
+  dio: ^3.0.10
 
   flutter:
     sdk: flutter
