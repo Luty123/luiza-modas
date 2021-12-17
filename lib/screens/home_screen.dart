@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loja/datas/product_data.dart';
 import 'package:loja/helpers/Theme.dart';
 import 'package:loja/tabs/home_tab.dart';
 import 'package:loja/tabs/orders_tab.dart';
@@ -10,7 +11,7 @@ import 'package:loja/tabs/products_tab.dart';
 class HomeScreen extends StatelessWidget {
   //const HomeScreen({Key key}) : super(key: key);
   final _pageController =
-      PageController(); //Controlador de pagina para não deslizar lateralmente
+      PageController(); //Controlador de pagina para não deslizar lateralmente.
 
   @override
   Widget build(BuildContext context) {

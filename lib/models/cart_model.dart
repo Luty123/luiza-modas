@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:loja/datas/cart_product.dart';
+import 'package:loja/datas/address.dart';
 import 'package:loja/models/user_model.dart';
+import 'package:loja/services/cep_service.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:search_cep/search_cep.dart';
 
 class CartModel extends Model {
   UserModel user;
+  Address address;
 
   List<CartProduct> products = [];
   String couponCode;
@@ -167,5 +169,32 @@ class CartModel extends Model {
     products = query.docs.map((doc) => CartProduct.fromDocument(doc)).toList();
 
     notifyListeners();
+  }
+
+// Obter endereço de cep da API
+  Future<void> getAddress(String cep) async {
+    final cepService = CepService();
+    notifyListeners();
+    try {
+// Se a API for alterada, basta trocar o final cepAddress e fazer apontar para o novo serviço de API
+      final cepAddress = await cepService.getAddressFromCep(cep);
+      if (cepAddress != null) {
+        address = Address(
+          street: cepAddress.logradouro,
+          district: cepAddress.bairro,
+          zipCode: cepAddress.cep,
+          city: cepAddress.cidade.nome,
+          state: cepAddress.estado.sigla,
+          latitude: cepAddress.latitude,
+          longitude: cepAddress.longitude,
+        );
+        notifyListeners();
+      }
+
+      //print(cepAddress);
+    } catch (e) {
+      //debugPrint(e.toString());
+      notifyListeners();
+    }
   }
 }

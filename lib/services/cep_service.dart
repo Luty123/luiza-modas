@@ -6,15 +6,15 @@ const token =
     '172c71f883c3b133b75b8c0cb57e4da0'; // Token de acesso da API do CEP aberto
 
 class CepService {
-  Future<CepAddress> getAdressFromCep(String cep) async {
+  Future<CepAddress> getAddressFromCep(String cep) async {
     final cleanCep =
         cep.replaceAll('.', '').replaceAll('-', ''); // Limpa os caracteres
     final endPoint =
         "https://www.cepaberto.com/api/v3/cep?cep=$cleanCep"; // Busca o CEP armazenado em '$cleanCep'
 
     final Dio dio = Dio(); // Chama o token para autenticar na API
-    dio.options.headers[HttpHeaders.authorizationHeader] =
-        'Token token = $token';
+
+    dio.options.headers[HttpHeaders.authorizationHeader] = 'Token token=$token';
 
     try {
       final response = await dio.get<Map<String, dynamic>>(

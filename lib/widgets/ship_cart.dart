@@ -1,8 +1,24 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:loja/helpers/Theme.dart';
+import 'package:loja/datas/address.dart';
+import 'package:loja/models/cart_model.dart';
+import 'package:loja/services/cep_service.dart';
+import 'package:loja/widgets/address_input_field.dart';
+import 'package:provider/provider.dart';
+import 'package:scoped_model/scoped_model.dart';
 
-class ShipCard extends StatelessWidget {
+class ShipCard extends StatefulWidget {
+  @override
+  State<ShipCard> createState() => _ShipCardState();
+}
+
+class _ShipCardState extends State<ShipCard> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController cepController = TextEditingController();
+  //String cep;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -16,17 +32,57 @@ class ShipCard extends StatelessWidget {
         ),
         leading: Icon(Icons.location_on),
         children: <Widget>[
-          TextFormField(
-            decoration: InputDecoration(
-                border: OutlineInputBorder(), hintText: "Digite seu CEP"),
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            keyboardType: TextInputType.number,
+          ScopedModelDescendant<CartModel>(
+            builder: (context, child, model) {
+              final address = CartModel.of(context).getAddress ?? Address();
+              print(address);
+              return Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: cepController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: "12.345-678",
+                        isDense: true,
+                      ),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        CepInputFormatter(), // Formata o Cep para o padrão 12.345-678 utilizando o plugin brasil_fields
+                      ],
+                      keyboardType: TextInputType.number,
+                      // Verificar a formatação do CEP
+                      validator: (cep) {
+                        if (cep.isEmpty) {
+                          return 'Campo obrigatório';
+                        } else if (cep.length != 10) {
+                          return 'CEP inválido';
+                        }
+                        return null;
+                      },
+                      // onChanged: (text) => cep = text,
+                    ),
+                    //AddressInputField(address),
+                  ],
+                ),
+              );
+            },
+          ),
+          SizedBox(
+            height: 16.0,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  //TODO
+
+                  // context.read<CartModel>().getAddress(cepController.text);
+                  //TODO - verificar parametro do getaddress
+                  CartModel.of(context).getAddress(cepController.text);
+                },
                 child: Text(
                   "Buscar CEP",
                   style: TextStyle(fontSize: 18.0),
@@ -42,19 +98,19 @@ class ShipCard extends StatelessWidget {
             ],
           )
           /* Padding(
-            padding: EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText:
-                      "Desculpe! Serviço indisponível no momento"), // Trocar por "Digite seu CEP quando a geolocalização for corrigida"
-              initialValue: "",
-              onFieldSubmitted: (text) {},
-              
-            ),
-          
-            
-          ),*/
+                  padding: EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText:
+                            "Desculpe! Serviço indisponível no momento"), // Trocar por "Digite seu CEP quando a geolocalização for corrigida"
+                    initialValue: "",
+                    onFieldSubmitted: (text) {},
+                    
+                  ),
+                
+                  
+                ),*/
         ],
       ),
     );

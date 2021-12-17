@@ -17,9 +17,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
   final _rePassController = TextEditingController();
-  final _addressController = TextEditingController();
-  final _districtAddressController = TextEditingController();
-  final _complementAddressController = TextEditingController();
+//  final _addressController = TextEditingController();
+//  final _districtAddressController = TextEditingController();
+//  final _complementAddressController = TextEditingController();
   final _contactController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -334,7 +334,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           SizedBox(
                             height: 32.0,
                           ),
-                          Row(
+                          /*Row(
                             children: <Widget>[
                               Expanded(
                                 child: Divider(
@@ -446,7 +446,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   return "Insira um ponto de referência";
                               },
                             ),
-                          ),
+                          ),*/
                           SizedBox(
                             height: 32.0,
                           ),
@@ -520,11 +520,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       "name": _nameController.text,
                                       "surname": _surnameController.text,
                                       "email": _emailController.text,
-                                      "address": _addressController.text,
+                                      /*"address": _addressController.text,
                                       "district":
                                           _districtAddressController.text,
                                       "complement":
-                                          _complementAddressController.text,
+                                          _complementAddressController.text,*/
                                       "contact": _contactController.text
                                     };
 
