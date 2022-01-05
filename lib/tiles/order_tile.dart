@@ -1,7 +1,9 @@
 import 'dart:collection';
 
+//Classe responsavel pelos elementos que serão exibidos na tela de acompanhamento do pedido
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:loja/helpers/loader.dart';
 
 class OrderTile extends StatelessWidget {
   final String orderId;
@@ -10,7 +12,7 @@ class OrderTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-      // Teste para pegar o id do pedido
+      // Teste para verificar o retorno do id do pedido
       // child: Text(orderId),
       child: Padding(
         padding: EdgeInsets.all(8.0),
@@ -22,9 +24,10 @@ class OrderTile extends StatelessWidget {
           builder: (context, snapshot) {
             if (!snapshot.hasData)
               return Center(
-                child: CircularProgressIndicator(),
+                child: Loader(),
               );
             else {
+              //Mostra ao usuario o codigo do pedido
               int status = snapshot.data["status"];
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,6 +54,7 @@ class OrderTile extends StatelessWidget {
                     height: 4.0,
                   ),
                   Row(
+                    //Mostra o status atual do pedido
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       _buildCircle("1", "Preparação", status, 1),
@@ -98,7 +102,7 @@ class OrderTile extends StatelessWidget {
         style: TextStyle(color: Colors.white),
       );
     } else if (status == thisStatus) {
-      backColor = Colors.blue;
+      backColor = Colors.transparent;
       child = Stack(
         alignment: Alignment.center,
         children: <Widget>[
@@ -106,9 +110,7 @@ class OrderTile extends StatelessWidget {
             title,
             style: TextStyle(color: Colors.white),
           ),
-          CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-          )
+          Loader()
         ],
       );
     } else {

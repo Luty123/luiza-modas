@@ -1,13 +1,12 @@
-import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_carousel_slider/carousel_slider.dart';
-import 'package:flutter_carousel_slider/carousel_slider_indicators.dart';
-import 'package:flutter_carousel_slider/carousel_slider_transforms.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:loja/helpers/Theme.dart';
+import 'package:loja/helpers/loader.dart';
+import 'package:loja/tabs/products_tab.dart';
 import 'package:transparent_image/transparent_image.dart';
 
+//Classe responsavel pelas função da Aba Inicial
 class HomeTab extends StatefulWidget {
   @override
   State<HomeTab> createState() => _HomeTabState();
@@ -15,7 +14,6 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab> {
   @override
-// Gradiente da home
   Widget build(BuildContext context) {
     Widget _buildBodyBack() => Container(
           decoration: BoxDecoration(
@@ -24,23 +22,25 @@ class _HomeTabState extends State<HomeTab> {
             MaterialColors.signEndGradient,
           ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
         );
-// Barra flutuante
+
+    //Barra flutuante da tela inicial
     return FutureBuilder<QuerySnapshot>(
       future: FirebaseFirestore.instance.collection("users").get(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: Loader(),
           );
         } else {
           return Stack(
             children: [
               _buildBodyBack(),
               CustomScrollView(
+                shrinkWrap: true,
                 slivers: <Widget>[
                   SliverAppBar(
                     backgroundColor: Colors.transparent,
-                    expandedHeight: 200.0,
+                    expandedHeight: 250.0,
                     // floating: false,
                     pinned: true,
                     flexibleSpace: FlexibleSpaceBar(
@@ -54,73 +54,182 @@ class _HomeTabState extends State<HomeTab> {
                           fit: BoxFit.cover,
                         )),
                   ),
+                  //Barra de seleção
                   SliverToBoxAdapter(
                     child: Container(
-                        margin: EdgeInsets.only(top: 10.0),
-                        color: MaterialColors.socialDribbble,
-                        child: Padding(
-                          padding: EdgeInsets.all(5.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              MaterialButton(
-                                  onPressed: () {},
-                                  child: Text("Promoções".toUpperCase(),
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold))),
-                              MaterialButton(
-                                onPressed: () {},
-                                child: Text(
-                                  "Ver Todas".toUpperCase(),
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w400),
-                                ),
+                      //margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                      color: MaterialColors.success,
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            MaterialButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      //TODO Apontar para uma categoria especifica - Em construção -
+                                      //Rota para a tela de categorias
+                                      builder: (context) => ProductsTab(),
+                                    ),
+                                  );
+                                },
+                                child: Text("Promoções".toUpperCase(),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold))),
+                            MaterialButton(
+                              onPressed: () {
+                                //TODO Apontar para uma categoria especifica - Em construção -
+                                //Rota para a tela de categorias
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => ProductsTab(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                "Ver Todas".toUpperCase(),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w400),
                               ),
-                            ],
-                          ),
-                        )),
-                  ),
-                  FutureBuilder<QuerySnapshot>(
-                    future: FirebaseFirestore.instance
-                        .collection("promotions")
-                        .orderBy("position")
-                        .get(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData)
-                        return SliverToBoxAdapter(
-                          child: Container(
-                            height: 200.0,
-                            alignment: Alignment.center,
-                            child: CircularProgressIndicator(
-                              valueColor:
-                                  AlwaysStoppedAnimation<Color>(Colors.white),
                             ),
-                          ),
-                        );
-                      else
-                        return Container(
-                          child: SliverStaggeredGrid.count(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 1.0,
-                            crossAxisSpacing: 1.0,
-                            staggeredTiles: snapshot.data.docs.map((doc) {
-                              return StaggeredTile.count(
-                                  doc.data()["x"], doc.data()["y"]);
-                            }).toList(),
-                            children: snapshot.data.docs.map((doc) {
-                              return FadeInImage.memoryNetwork(
-                                placeholder: kTransparentImage,
-                                image: doc.data()["image"],
-                                fit: BoxFit.cover,
-                              );
-                            }).toList(),
-                          ),
-                        );
-                    },
-                  )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  //TODO Slide criar slide de imagens - Em construção -
+                  //Grade de imagens
+                  Container(
+                    child: FutureBuilder<QuerySnapshot>(
+                      future: FirebaseFirestore.instance
+                          .collection("promotions")
+                          .orderBy("position")
+                          .get(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData)
+                          return SliverToBoxAdapter(
+                            child: Container(
+                                height: 100.0,
+                                alignment: Alignment.center,
+                                child: Loader()),
+                          );
+                        else
+                          return Container(
+                            /*Obtem as imagens do banco de dados e ordena elas em 
+                            grade de acordo com a posição definida*/
+                            child: SliverStaggeredGrid.count(
+                              crossAxisCount: 4,
+                              mainAxisSpacing: 4,
+                              crossAxisSpacing: 4,
+                              staggeredTiles: snapshot.data.docs.map((doc) {
+                                return StaggeredTile.count(
+                                    doc.data()["x"], doc.data()["y"]);
+                              }).toList(),
+                              children: snapshot.data.docs.map((doc) {
+                                return FadeInImage.memoryNetwork(
+                                  placeholder: kTransparentImage,
+                                  image: doc.data()["image"],
+                                  fit: BoxFit.cover,
+                                );
+                              }).toList(),
+                            ),
+                          );
+                      },
+                    ),
+                  ),
+                  //Barra de seleção
+                  SliverToBoxAdapter(
+                    child: Container(
+                      margin: EdgeInsets.only(top: 10.0),
+                      color: MaterialColors.success,
+                      child: Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            MaterialButton(
+                                onPressed: () {
+                                  //TODO Apontar para uma categoria especifica - Em construção -
+                                  //Rota para a tela de categorias
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => ProductsTab(),
+                                    ),
+                                  );
+                                },
+                                child: Text("Novidades".toUpperCase(),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold))),
+                            MaterialButton(
+                              onPressed: () {
+                                //TODO Apontar para uma categoria especifica - Em construção -
+                                //Rota para a tela de categorias
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => ProductsTab(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                "Ver Todas".toUpperCase(),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    //TODO Slide criar slide de imagens - Em construção -
+                    //Grade de imagens
+                    child: FutureBuilder<QuerySnapshot>(
+                      future: FirebaseFirestore.instance
+                          .collection("news")
+                          .orderBy("position")
+                          .get(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData)
+                          return SliverToBoxAdapter(
+                            child: Container(
+                                height: 250.0,
+                                alignment: Alignment.center,
+                                child: Loader()),
+                          );
+                        else
+                          return Container(
+                            /*Obtem as imagens do banco de dados e ordena elas em 
+                            grade de acordo com a posição definida*/
+                            child: SliverStaggeredGrid.count(
+                              crossAxisCount: 3,
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 10,
+                              staggeredTiles: snapshot.data.docs.map((doc) {
+                                return StaggeredTile.count(
+                                    doc.data()["x"], doc.data()["y"]);
+                              }).toList(),
+                              children: snapshot.data.docs.map((doc) {
+                                return FadeInImage.memoryNetwork(
+                                  placeholder: kTransparentImage,
+                                  image: doc.data()["image"],
+                                  fit: BoxFit.cover,
+                                );
+                              }).toList(),
+                            ),
+                          );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ],

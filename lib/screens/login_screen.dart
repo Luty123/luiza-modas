@@ -1,22 +1,27 @@
+// ignore_for_file: deprecated_member_use, duplicate_ignore
+
 import 'package:flutter/material.dart';
 import 'package:loja/helpers/Theme.dart';
 import 'package:loja/helpers/assets.dart';
+import 'package:loja/helpers/loader.dart';
 import 'package:loja/helpers/validators.dart';
 import 'package:loja/models/user_model.dart';
 import 'package:loja/screens/signup_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+//Classe responsavel pela tela de login do app
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _emailController = TextEditingController();
-  final _passController = TextEditingController();
+  final _emailController = TextEditingController(); //Email
+  final _passController = TextEditingController(); //Senha
   final String background = loginBack;
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>(); //Key global do formulario
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  bool _obscureText = true;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -32,12 +37,8 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         body: ScopedModelDescendant<UserModel>(
           builder: (context, child, model) {
-            if (model.isLoading)
-              return Center(
-                child: CircularProgressIndicator(
-                    //valueColor: ,
-                    ),
-              );
+            if (model.isLoading) return Center(child: Loader());
+            //Formulario de login
             return Form(
               key: _formKey,
               child: Container(
@@ -89,11 +90,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             SizedBox(
                               height: 250.0,
                             ),
+                            //Campo de preenchimento do email e validadores
                             TextFormField(
                               enabled: !model.isLoading,
                               controller: _emailController,
                               style: TextStyle(color: Colors.white),
                               decoration: InputDecoration(
+                                filled: true,
                                 hintText: "E-mail",
                                 hintStyle: TextStyle(color: Colors.white70),
                                 enabledBorder: UnderlineInputBorder(
@@ -113,16 +116,31 @@ class _LoginScreenState extends State<LoginScreen> {
                             SizedBox(
                               height: 10.0,
                             ),
+                            //Campo de preenchimento da senha e validadores
                             TextFormField(
                               enabled: !model.isLoading,
                               controller: _passController,
-                              obscureText: true,
+                              obscureText: _obscureText,
                               style: TextStyle(color: Colors.white),
                               decoration: InputDecoration(
+                                filled: true,
                                 hintText: "Senha",
                                 hintStyle: TextStyle(color: Colors.white70),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white54),
+                                ),
+                                suffixIcon: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _obscureText = !_obscureText;
+                                    });
+                                  },
+                                  child: Icon(
+                                    _obscureText
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: MaterialColors.warning,
+                                  ),
                                 ),
                               ),
                               validator: (pass) {
@@ -135,6 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             SizedBox(
                               height: 10.0,
                             ),
+                            //Função do botão Recuperar senha e validadores
                             Align(
                               alignment: Alignment.centerRight,
                               child: GestureDetector(
@@ -149,6 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ),
                                     );
                                   else {
+                                    //Verifica se o email existe no banco de dados do firebase
                                     model.recoverPass(_emailController.text);
                                     _scaffoldKey.currentState.showSnackBar(
                                       SnackBar(
@@ -170,6 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             SizedBox(
                               height: 20.0,
                             ),
+                            //Botão ENTRAR
                             SizedBox(
                               width: double.infinity,
                               child: SizedBox(
@@ -196,6 +217,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                             ),
+                            //Criar Conta
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
@@ -243,11 +265,15 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  //Função apos um login com sucesso, retorna para a home
   void _onSuccess() {
     Navigator.of(context).pop();
   }
 
+  //Função caso o login falhe, emite um aviso
+  // ignore: duplicate_ignore
   void _onFail() {
+    // ignore: deprecated_member_use
     _scaffoldKey.currentState.showSnackBar(
       SnackBar(
         content: Text("Falha ao Entrar!"),

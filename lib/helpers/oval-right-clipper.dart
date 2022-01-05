@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
+// Classe para definir o efeito de arredondamento dos vertices de um objto
 class OvalRightBorderClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     var path = Path();
     path.lineTo(0, 0);
     path.lineTo(size.width - 40, 0);
+
+    // Defina os valores para alterar o efeito
     path.quadraticBezierTo(
         size.width, size.height / 4, size.width, size.height / 2);
     path.quadraticBezierTo(size.width, size.height - (size.height / 4),

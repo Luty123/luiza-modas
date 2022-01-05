@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loja/screens/cart_screen.dart';
 
+//Widget responsavel pelo botão flutuante do carrinho de compras
 class CartButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

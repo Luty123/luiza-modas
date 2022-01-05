@@ -5,22 +5,24 @@ import 'package:loja/models/user_model.dart';
 import 'package:loja/screens/login_screen.dart';
 import 'package:loja/tiles/drawer_tile.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+//Widget responsavel pela personalização do menu
 class CustomDrawer extends StatelessWidget {
   final PageController pageController;
   final Color active = Colors.black;
   CustomDrawer(this.pageController);
   @override
-// Gradiente
+  //Gradiente do background
   Widget build(BuildContext context) {
-    Widget _buildDrawerBack() => Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-            Color.fromARGB(255, 253, 181, 168),
-            Color.fromARGB(255, 255, 170, 255),
-          ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-        );
-// Menu Drawer e lista de opções
+    // Widget _buildDrawerBack() => Container(
+    //       decoration: BoxDecoration(
+    //           gradient: LinearGradient(colors: [
+    //         Color.fromARGB(255, 253, 181, 168),
+    //         Color.fromARGB(255, 255, 170, 255),
+    //       ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+    //     );
+    //menu Drawer e lista de opções
     return ClipPath(
       clipper: OvalRightBorderClipper(),
       child: Drawer(
@@ -29,7 +31,6 @@ class CustomDrawer extends StatelessWidget {
             DrawerHeader(
               decoration: BoxDecoration(color: MaterialColors.gradientStart),
               child: Container(
-                //padding: EdgeInsets.symmetric(horizontal: 28.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,6 +38,7 @@ class CustomDrawer extends StatelessWidget {
                     GestureDetector(
                       onTap: () => _showSecondPage(context),
                       child: Hero(
+                        //Exibe o icone da loja, possui animação
                         tag: 'luiza-modas',
                         child: CircleAvatar(
                           radius: 30.0,
@@ -73,11 +75,11 @@ class CustomDrawer extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 0.0, top: 0.0),
                       child: ScopedModelDescendant<UserModel>(
                         builder: (context, child, model) {
-                          //print(model.isLoggedIn());
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
+                                //Exibe o primeiro nome do usuario logado
                                 "Olá, ${!model.isLoggedIn() ? "" : model.userData["name"]}",
                                 style: TextStyle(
                                     fontSize: 16.0,
@@ -86,6 +88,8 @@ class CustomDrawer extends StatelessWidget {
                               ),
 // Função  para detectar o entre ou cadastre-se
                               GestureDetector(
+                                //Caso o usuario esteja deslogado, pede para entrar ou se cadastrar
+                                //Caso o usuario estejaa logado, exibe o botão de logout
                                 child: Text(
                                   !model.isLoggedIn()
                                       ? "Entre ou cadastre-se"
@@ -117,6 +121,7 @@ class CustomDrawer extends StatelessWidget {
             ),
             Expanded(
               child: ListView(
+                //Lista das opções no menu e suas respectivas rotas
                 padding: EdgeInsets.only(top: 8, left: 8, right: 8),
                 children: [
                   DrawerTile(
@@ -130,9 +135,8 @@ class CustomDrawer extends StatelessWidget {
                   DrawerTile(Icons.maps_home_work, "Lojas", pageController, 2),
                   DrawerTile(
                       Icons.checklist, "Meus Pedidos", pageController, 3),
-                  //DrawerTile(Icons.person, "Perfil", pageController, 4),
-                  //DrawerTile(
-                  // Icons.phonelink_ring, "Contato", pageController, 5),
+                  DrawerTile(Icons.person, "Sobre", pageController, 4),
+                  DrawerTile(Icons.edit, "Termos", pageController, 5),
                   // DrawerTile(Icons.more_horiz, "Sobre", pageController, 6),
                 ],
               ),

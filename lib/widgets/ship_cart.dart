@@ -4,11 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:loja/helpers/Theme.dart';
 import 'package:loja/datas/address.dart';
 import 'package:loja/models/cart_model.dart';
-import 'package:loja/services/cep_service.dart';
-import 'package:loja/widgets/address_input_field.dart';
-import 'package:provider/provider.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+//TODO - Opção de frete - Em construção -
+//Widget responsavel pela opção de inserir e calcular o frete
 class ShipCard extends StatefulWidget {
   @override
   State<ShipCard> createState() => _ShipCardState();
@@ -77,8 +76,6 @@ class _ShipCardState extends State<ShipCard> {
             children: <Widget>[
               ElevatedButton(
                 onPressed: () {
-                  //TODO
-
                   // context.read<CartModel>().getAddress(cepController.text);
                   //TODO - verificar parametro do getaddress
                   CartModel.of(context).getAddress(cepController.text);

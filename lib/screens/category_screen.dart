@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loja/datas/product_data.dart';
 import 'package:loja/helpers/Theme.dart';
+import 'package:loja/helpers/loader.dart';
 import 'package:loja/tiles/product_tile.dart';
 
+//Classe responsavel pela tela das categorias de produtos
 class CategoryScreen extends StatelessWidget {
   final DocumentSnapshot snapshot;
   CategoryScreen(this.snapshot);
@@ -12,12 +14,13 @@ class CategoryScreen extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: MaterialColors.active,
         appBar: AppBar(
           title: Text(snapshot.data()["title"]),
           centerTitle: true,
           backgroundColor: MaterialColors.signStartGradient,
           bottom: TabBar(
-            indicatorColor: MaterialColors.label,
+            indicatorColor: Colors.white,
             tabs: <Widget>[
               Tab(
                 icon: Icon(Icons.grid_on),
@@ -28,6 +31,7 @@ class CategoryScreen extends StatelessWidget {
             ],
           ),
         ),
+        //Obtem os dados da coleção produtos do firebase e exibe na tela
         body: FutureBuilder<QuerySnapshot>(
           future: FirebaseFirestore.instance
               .collection("products")
@@ -38,7 +42,7 @@ class CategoryScreen extends StatelessWidget {
           builder: (context, snapshot) {
             if (!snapshot.hasData)
               return Center(
-                child: CircularProgressIndicator(),
+                child: Loader(),
               );
             else
               return TabBarView(
@@ -57,7 +61,7 @@ class CategoryScreen extends StatelessWidget {
                       ProductData data =
                           ProductData.fromDocument(snapshot.data.docs[index]);
                       data.category = this.snapshot.id;
-                      return ProductTile("grid", data);
+                      return Container(child: ProductTile("grid", data));
                     },
                   ),
                   ListView.builder(

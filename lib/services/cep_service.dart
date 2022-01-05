@@ -2,6 +2,9 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:loja/models/cep_model.dart';
 
+//TODO CEP chamando dados da API - Em construção -
+//Classe para obter os dados de serviço da API de geolocalização
+
 const token =
     '172c71f883c3b133b75b8c0cb57e4da0'; // Token de acesso da API do CEP aberto
 
@@ -27,6 +30,7 @@ class CepService {
       final CepAddress address = CepAddress.fromMap(response.data);
       return address;
 //      print(response.data); // Testando
+      // ignore: unused_catch_clause
     } on DioError catch (e) {
       return Future.error(
           'Erro ao Buscar CEP'); // Caso não haja internet ou outro erro de busca

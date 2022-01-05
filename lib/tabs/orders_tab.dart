@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:loja/helpers/Theme.dart';
-import 'package:loja/models/user_model.dart';
+import 'package:loja/helpers/loader.dart';
 import 'package:loja/models/user_model.dart';
 import 'package:loja/screens/login_screen.dart';
 import 'package:loja/tiles/order_tile.dart';
 
+//Classe responsavel pela guia de pedidos do usuario
 class OrdersTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -22,9 +22,10 @@ class OrdersTab extends StatelessWidget {
         builder: (context, snapshop) {
           if (!snapshop.hasData)
             return Center(
-              child: CircularProgressIndicator(),
+              child: Loader(),
             );
           else {
+            //Retorna os dados do pedido do usuario
             return ListView(
               children: snapshop.data.docs
                   .map((doc) => OrderTile(doc.id))
@@ -37,6 +38,7 @@ class OrdersTab extends StatelessWidget {
       );
     } else {
       return Container(
+        //Verifica se o usuario esta logado
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

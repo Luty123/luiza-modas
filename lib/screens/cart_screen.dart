@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loja/helpers/Theme.dart';
+import 'package:loja/helpers/loader.dart';
 import 'package:loja/models/cart_model.dart';
 import 'package:loja/models/user_model.dart';
 import 'package:loja/screens/login_screen.dart';
@@ -7,15 +8,15 @@ import 'package:loja/screens/order_screen.dart';
 import 'package:loja/tiles/cart_tile.dart';
 import 'package:loja/widgets/cart_price.dart';
 import 'package:loja/widgets/discount_card.dart';
-import 'package:loja/widgets/ship_cart.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+//Classe responsavel pela tela do carrinho de compras
 class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: MaterialColors.primary,
+        backgroundColor: MaterialColors.signStartGradient,
         title: Text("Meu carrinho"),
         centerTitle: true,
         actions: <Widget>[
@@ -24,10 +25,10 @@ class CartScreen extends StatelessWidget {
             alignment: Alignment.center,
             child: ScopedModelDescendant<CartModel>(
               builder: (context, child, model) {
-                int p = model
-                    .products.length; // Variavel para pegar o tamanho da lista
-                // Se p for nulo retorn 0, caso contrario, retorna p
-                // Se p = 1, mostra ITEM, se for maior que 1, retorna ITENS
+                /* Variavel para pegar o tamanho da lista
+                Se p for nulo retorn 0, caso contrario, retorna p
+                Se p = 1, mostra ITEM, se for maior que 1, retorna ITENS*/
+                int p = model.products.length;
                 return Text(
                   "${p ?? 0}  ${p == 1 ? "ITEM" : "ITENS"}",
                   style: TextStyle(fontSize: 17.0),
@@ -37,11 +38,13 @@ class CartScreen extends StatelessWidget {
           )
         ],
       ),
+      //Verifica se o usuario esta logado ao acessar o carrinho
       body: ScopedModelDescendant<CartModel>(builder: (context, child, model) {
         if (model.isLoading && UserModel.of(context).isLoggedIn()) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: Loader(),
           );
+          //Caso não esteja logado, solicita que o usuario faça login para acessar os itens do carrinho
         } else if (!UserModel.of(context).isLoggedIn()) {
           return Container(
             padding: EdgeInsets.all(16.0),
@@ -86,6 +89,7 @@ class CartScreen extends StatelessWidget {
               ],
             ),
           );
+          //Caso não exista nenhum produto no carrinho do usuario logado
         } else if (model.products == null || model.products.length == 0) {
           return Center(
             child: Text(
@@ -103,7 +107,8 @@ class CartScreen extends StatelessWidget {
                 }).toList(),
               ),
               DiscountCard(),
-              ShipCard(),
+              //TODO - CEP Habilita o botão do frete no carrinho de compras - Em construção -
+              //ShipCard(),
               CartPrice(() async {
                 String orderId = await model.finishOrder();
                 if (orderId != null)

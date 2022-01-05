@@ -4,13 +4,14 @@ import 'package:scoped_model/scoped_model.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 
+// Classe para importar e tratar os dados de cadastro, login e logout do usuario
+// Gerencia de estados utilizada com ScopedModel
 class UserModel extends Model {
-  //usuario atual
-
   FirebaseAuth _auth = FirebaseAuth.instance;
   User firebaseUser;
 
-  Map<String, dynamic> userData = Map();
+  Map<String, dynamic> userData =
+      Map(); //Mapa contendo as informações do usuario
 
   bool isLoading = false;
   static UserModel of(BuildContext context) =>
@@ -22,6 +23,7 @@ class UserModel extends Model {
     _loadCurrentUser();
   }
 
+  //Recebe os dados cadastrados do usuario cadastrados
   void signUp(
       {@required Map<String, dynamic> userData,
       @required String pass,
@@ -29,17 +31,21 @@ class UserModel extends Model {
       @required VoidCallback onFail}) {
     isLoading = true;
     notifyListeners();
+    //Tenta criar o usuario com os dados informados
     _auth
         .createUserWithEmailAndPassword(
             email: userData["email"], password: pass)
         .then((credentials) async {
+      //Se o cadastro for um sucesso
       firebaseUser = credentials.user;
-      await _saveUserData(userData);
+      await _saveUserData(
+          userData); //Salva as outras informações alem do email e senha
 
       onSuccess();
       isLoading = false;
       notifyListeners();
     }).catchError((e) {
+      //Caso ocorra algum erro no cadastro
       onFail();
       isLoading = false;
       notifyListeners();
@@ -71,11 +77,11 @@ class UserModel extends Model {
       isLoading = false;
       notifyListeners();
     })
-          ..whenComplete(() {
-            onFail();
-            isLoading = false;
-            notifyListeners();
-          });
+      ..whenComplete(() {
+        onFail();
+        isLoading = false;
+        notifyListeners();
+      });
   }
 
   void recoverPass(String email) {
@@ -94,6 +100,7 @@ class UserModel extends Model {
     notifyListeners();
   }
 
+  //Função para salvar os dados do usuario no firebase
   Future<Null> _saveUserData(Map<String, dynamic> userData) async {
     this.userData = userData;
     await FirebaseFirestore.instance
@@ -102,7 +109,9 @@ class UserModel extends Model {
         .set(userData);
   }
 
+  //Função para carregar os dados do usuario no firebase
   Future<Null> _loadCurrentUser() async {
+    // ignore: await_only_futures
     if (firebaseUser == null) firebaseUser = await _auth.currentUser;
     if (firebaseUser != null) {
       if (userData["name"] == null) {

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:loja/helpers/Theme.dart';
 
+//Classe responsavel pelos elementos que serão exibidos no menu lateral
 class DrawerTile extends StatelessWidget {
   final IconData icon;
   final String text;
   final PageController controller;
   final int page;
-  //final bool isSelected;
-  //final Color iconColor = Colors.black;
 
   DrawerTile(
     this.icon,
@@ -20,13 +19,13 @@ class DrawerTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
-// Função para linkar as outras paginas
+      //Função para linkar as outras paginas com as opções referente no menu
       child: InkWell(
         onTap: () {
           Navigator.of(context).pop();
           controller.jumpToPage(page);
         },
-// Lista do menu - opções
+        //Lista do menu - opções
         child: Container(
           height: 45.0,
           padding: EdgeInsets.symmetric(horizontal: 16),

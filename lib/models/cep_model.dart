@@ -1,3 +1,6 @@
+//TODO - CEP tratamento de dados - Em construção -
+// Classe para importar e tratar os dados de localização da api
+
 class CepAddress {
   final double altitude;
   final String cep;
@@ -9,8 +12,7 @@ class CepAddress {
   final Cidade cidade;
   final Estado estado;
 
-// Metodo para transformar o map de cep_service em um objeto
-
+  //Metodo para transformar o map de cep_service em um objeto
   CepAddress.fromMap(Map<String, dynamic> map)
       : altitude = map['altitude'] as double,
         cep = map['cep'] as String,

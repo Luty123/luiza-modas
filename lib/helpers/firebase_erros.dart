@@ -1,4 +1,5 @@
-// Ainda em construção
+//TODO - Relatorio de erros - Em construção -
+//Alerta de erros nos validadores de email e senha
 String getErrorString(String code) {
   switch (code) {
     case 'ERROR_WEAK_PASSWORD':

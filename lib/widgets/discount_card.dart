@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loja/models/cart_model.dart';
 
+//Widget responsavel pelo card de desconto exibido no processo de finalizar o pedido
 class DiscountCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -26,13 +27,14 @@ class DiscountCard extends StatelessWidget {
               onFieldSubmitted: (text) {
                 FirebaseFirestore.instance
                     .collection("coupons")
-                    .doc(text
-                        .toUpperCase()) // envia o texto do cupom em maiusculo para comparar
+                    .doc(text.toUpperCase())
                     .get()
                     .then((docSnap) {
+                  //Verifica a validade e o valor do desconto e aplica esse desconto
                   if (docSnap.data() != null) {
                     CartModel.of(context)
                         .setCoupon(text, docSnap.data()["percent"]);
+                    // ignore: deprecated_member_use
                     Scaffold.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
@@ -41,7 +43,9 @@ class DiscountCard extends StatelessWidget {
                       ),
                     );
                   } else {
+                    //Exibe um erro se o cupom for invalido
                     CartModel.of(context).setCoupon(null, 0);
+                    // ignore: deprecated_member_use
                     Scaffold.of(context).showSnackBar(
                       SnackBar(
                         content: Text("Cupom inválido!"),

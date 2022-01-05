@@ -1,3 +1,4 @@
+// Frete
 // Padronizar os dados do endereço caso a API seja trocada. Tornando os dados de endereço como globais
 class Address {
   Address(

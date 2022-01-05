@@ -1,10 +1,10 @@
-// Quando for implementar o botão  de  pesquisar
+//TODO - Barra de pesquisa - Em construção -
+//Quando for implementar o botão  de  pesquisar
 import 'package:flutter/material.dart';
 import 'package:loja/helpers/Theme.dart';
 
 class SearchDialog extends StatelessWidget {
   //const SearchDialog({ Key? key }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Stack(
