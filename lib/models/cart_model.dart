@@ -125,7 +125,7 @@ class CartModel extends Model {
   //TODO - CEP Calculo - Em construção -
   //Função para retornar o valor da entrega
   double getShipPrice(switchVal) {
-    if (switchVal == true) {
+    if (switchVal == false) {
       return 10.0;
     } else
       return 0.0;

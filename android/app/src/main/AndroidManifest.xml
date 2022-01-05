@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="luciano_loja.com.loja">
    <application
-        android:label="loja"
+        android:label="Luíza Modas"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
