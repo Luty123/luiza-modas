@@ -31,6 +31,7 @@ Verifique as versões das dependências e tente manter elas como estão para evi
 </div>
 
 Getting Started.
+
 Preparando o ambiente para receber o projeto
 • Android Studio devidamente instalando no sistema operacional utilizado o Para mais informações, consultar https://developer.android.com/studio • Instalar um virtual device através do Android Studio, o virtual device utilizado e suas características utilizado no projeto, podem ser vistos no documento de visão deste projeto na seção 6. Restrições técnicas e tecnologias. o Para mais informações de como instalar um virtual device pelo Android Studio, consultar https://developer.android.com/studio/run/managing-avds?hl=pt-br • Editor de código devidamente instalado. Neste projeto foi utilizado o VS Code. o Parar mais informações, consultar https://code.visualstudio.com/ • Flutter devidamente instalado no sistema operacional. o Para mais informações sobre como instalar o flutter, consultar https://flutter.dev/docs/get-started/install • Instale o git bash no windows para melhor manipulação da camada de emulação para Git (Opcional) o Para mais informações consultar https://gitforwindows.org/
 
